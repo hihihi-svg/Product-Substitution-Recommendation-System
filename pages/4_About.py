@@ -284,38 +284,34 @@ st.markdown("---")
 st.markdown("## 📋 System Flow")
 
 st.markdown("""
-<div class='info-section'>
-    <h4>Page 1: Home/Dashboard</h4>
-    <p style='color: #cbd5e1 !important;'>
-        → User selects category (Electronics, Clothing, etc.)<br>
-        → Category cards with hover effects<br>
-        → Information about problem statement and objectives
-    </p>
-    
-    <h4>Page 2: Search & Product Listing</h4>
-    <p style='color: #cbd5e1 !important;'>
-        → Search bar with Trie-based suggestions<br>
-        → HashMap lookup for fast product retrieval<br>
-        → Display results from multiple sellers<br>
-        → Queue maintains ordered display
-    </p>
-    
-    <h4>Page 3: Comparison & Recommendation</h4>
-    <p style='color: #cbd5e1 !important;'>
-        → Min-Heap extracts best price<br>
-        → Calculate value scores (price + rating)<br>
-        → Graph + BFS finds cheaper alternatives<br>
-        → Stack tracks comparison history
-    </p>
-    
-    <h4>Page 4: Profile & Cart</h4>
-    <p style='color: #cbd5e1 !important;'>
-        → View comparison history (Stack)<br>
-        → Manage shopping cart (Queue)<br>
-        → User statistics and insights
-    </p>
-</div>
-""", unsafe_allow_html=True)
+#### Page 1: Home/Dashboard
+→ User selects category (Electronics, Clothing, etc.)  
+→ Category cards with hover effects  
+→ Information about problem statement and objectives
+
+#### Page 2: Search & Product Listing
+```
+→ Search bar with Trie-based suggestions
+→ HashMap lookup for fast product retrieval
+→ Display results from multiple sellers
+→ Queue maintains ordered display
+```
+
+#### Page 3: Comparison & Recommendation
+```
+→ Min-Heap extracts best price
+→ Calculate value scores (price + rating)
+→ Graph + BFS finds cheaper alternatives
+→ Stack tracks comparison history
+```
+
+#### Page 4: Profile & Cart
+```
+→ View comparison history (Stack)
+→ Manage shopping cart (Queue)
+→ User statistics and insights
+```
+""")
 
 # ==================== WHY NO APIs ====================
 st.markdown("---")
