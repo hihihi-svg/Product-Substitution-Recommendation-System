@@ -326,27 +326,20 @@ else:
 
 # ==================== FINAL ACTIONS ====================
 st.markdown("---")
-col1, col2, col3, col4 = st.columns(4)
+col1, col2, col3 = st.columns(3)
 
 with col1:
     if st.button("👤 View Profile", use_container_width=True, type="primary"):
         st.switch_page("pages/3_Profile.py")
 
 with col2:
-    if st.button("🛒 Add Best Price to Cart", use_container_width=True):
+    if st.button("🛒 Add to Cart", use_container_width=True):
         if 'cart' not in st.session_state:
             st.session_state.cart = []
         st.session_state.cart.append(best_product)
         st.success(f"✅ Added {product_name} to cart!")
 
 with col3:
-    if st.button("💎 Add Best Value to Cart", use_container_width=True):
-        if 'cart' not in st.session_state:
-            st.session_state.cart = []
-        st.session_state.cart.append(best_value)
-        st.success(f"✅ Added {product_name} to cart!")
-
-with col4:
     if st.button("🔍 Search Again", use_container_width=True):
         st.switch_page("pages/1_Search.py")
 
