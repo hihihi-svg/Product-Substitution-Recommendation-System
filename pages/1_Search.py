@@ -77,18 +77,53 @@ for name in unique_names:
     trie.insert(name)
 
 # ==================== SEARCH LOGIC ====================
+# Check if a suggestion was clicked
+if 'selected_suggestion' in st.session_state and st.session_state.selected_suggestion:
+    search_query = st.session_state.selected_suggestion
+    st.session_state.selected_suggestion = None
+
 if search_query:
     # Using Trie for prefix-based suggestions
     suggestions = trie.search_prefix(search_query)
     
-    if suggestions:
-        st.info(f"💡 **Prefix Search (Trie):** Found {len(suggestions)} suggestions")
+    if suggestions and len(suggestions) > 1:
+        # Show inline dropdown suggestions (Google-style)
+        st.markdown("""
+        <style>
+        .suggestion-box {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            padding: 10px;
+            margin-top: -10px;
+            margin-bottom: 20px;
+        }
+        .suggestion-item {
+            padding: 8px 12px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+        .suggestion-item:hover {
+            background: #334155;
+        }
+        </style>
+        """, unsafe_allow_html=True)
         
-        # Show suggestions
-        with st.expander("🔤 Auto-complete Suggestions", expanded=True):
-            for suggestion in suggestions[:5]:
-                if st.button(f"➡️ {suggestion}", key=f"suggest_{suggestion}"):
-                    search_query = suggestion
+        st.info(f"💡 **Trie Search:** Found {len(suggestions)} matching products")
+        
+        # Display suggestions as clickable items
+        st.markdown("<div class='suggestion-box'>", unsafe_allow_html=True)
+        st.markdown("**🔍 Did you mean:**")
+        
+        cols = st.columns(min(3, len(suggestions[:6])))
+        for idx, suggestion in enumerate(suggestions[:6]):
+            with cols[idx % 3]:
+                if st.button(f"🔎 {suggestion}", key=f"suggest_{suggestion}", use_container_width=True):
+                    st.session_state.selected_suggestion = suggestion
+                    st.rerun()
+        
+        st.markdown("</div>", unsafe_allow_html=True)
     
     # Using HashMap for fast lookup
     results = []

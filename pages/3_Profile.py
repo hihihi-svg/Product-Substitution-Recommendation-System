@@ -71,8 +71,23 @@ if 'comparison_history' in st.session_state and st.session_state.comparison_hist
                 - **Status:** ✅ Completed
                 """)
             
+            
             if st.button(f"🔄 Compare Again", key=f"recompare_{idx}"):
-                st.info("Navigate to Search page to compare this product again")
+                # Fetch product data and navigate to comparison
+                from data.products import get_all_products
+                
+                product_name = entry['product']
+                
+                # Find all variants of this product
+                all_products = get_all_products()
+                all_variants = [p for p in all_products if p['name'] == product_name]
+                
+                if all_variants:
+                    st.session_state.selected_products = all_variants
+                    st.session_state.selected_product_name = product_name
+                    st.switch_page("pages/2_Compare.py")
+                else:
+                    st.error("Product not found in database")
 else:
     st.warning("No comparison history yet. Start comparing products!")
     if st.button("🔍 Start Shopping"):

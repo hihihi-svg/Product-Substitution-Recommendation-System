@@ -329,8 +329,8 @@ st.markdown("---")
 col1, col2, col3, col4 = st.columns(4)
 
 with col1:
-    if st.button("📊 View Summary", use_container_width=True, type="primary"):
-        st.switch_page("pages/5_Summary.py")
+    if st.button("👤 View Profile", use_container_width=True, type="primary"):
+        st.switch_page("pages/3_Profile.py")
 
 with col2:
     if st.button("🛒 Add Best Price to Cart", use_container_width=True):
