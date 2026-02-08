@@ -339,6 +339,40 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
+# ==================== KEY ADVANTAGES ====================
+st.markdown("---")
+st.markdown("## 🚀 How is this Better? (Key Advantages)")
+
+col1, col2 = st.columns(2)
+
+with col1:
+    st.markdown("""
+    <div class='info-section' style='height: 100%;'>
+        <h3 style='color: #ef4444 !important;'>❌ Existing/Traditional Systems</h3>
+        <ul style='color: #cbd5e1 !important; line-height: 1.8;'>
+            <li><b>Generic Search:</b> Uses standard SQL queries like `LIKE %query%` which gets slower as data grows (O(N)).</li>
+            <li><b>Basic Sorting:</b> Sorts the entire product list every time you ask for the lowest price (O(N log N)).</li>
+            <li><b>Static Recommendations:</b> Often just shows "other items in category" without analyzing relationships.</li>
+            <li><b>No Price History:</b> Typically just shows current price without context of trends.</li>
+        </ul>
+    </div>
+    """, unsafe_allow_html=True)
+
+with col2:
+    st.markdown("""
+    <div class='info-section' style='height: 100%;'>
+        <h3 style='color: #10b981 !important;'>✅ Our DSA-Optimized System</h3>
+        <ul style='color: #cbd5e1 !important; line-height: 1.8;'>
+            <li><b>Trie Search:</b> Prefix-based search is lightning fast and depends only on word length, not database size (O(M)).</li>
+            <li><b>Min-Heap:</b> instantly fetches the lowest price in O(1) without sorting the whole list.</li>
+            <li><b>Graph Recommendations:</b> Smartly finds alternatives by traversing relationships (specs/price) for better suggestions.</li>
+            <li><b>Stack & Queue:</b> efficiently manages user history and session data for a smoother experience.</li>
+        </ul>
+    </div>
+    """, unsafe_allow_html=True)
+
+st.info("💡 **Key Takeaway:** By choosing the *right* data structure for each specific task, this system achieves optimal performance and better user experience compared to brute-force approaches.")
+
 # ==================== FOOTER ====================
 st.markdown("---")
 st.markdown("""

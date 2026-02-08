@@ -60,7 +60,19 @@ This project showcases the power of choosing the *right* data structure for the 
     streamlit run app.py
     ```
 
-## 🔮 Future Scope
+61:     ```
+62: 
+63: ## 🚀 How is Optimart Better? (DSA Advantage)
+64: 
+65: | Feature | ❌ Traditional Approach | ✅ Optimart (DSA Optimized) |
+66: | :--- | :--- | :--- |
+67: | **Search** | **O(N)** scan (slow with large data) | **O(M)** Trie Search (instant regardless of db size) |
+68: | **Best Price** | **O(N log N)** Sorting (computational heavy) | **O(1)** Min-Heap Extraction (instant access) |
+69: | **Recommendations** | Static category lists | **Graph + BFS** smart traversal of specs/price |
+70: | **History** | Database queries (slower) | **Stack** (LIFO) for immediate undo/backtrack |
+71: | **Trend Analysis** | Complex BI tools | **Queue** (FIFO) for sliding window price tracking |
+72: 
+73: ## 🔮 Future Scope
 *   **Real-time API Integration**: Connect to Amazon/Flipkart APIs for live data.
 *   **Machine Learning**: Use collaborative filtering for personalized user recommendations.
 *   **Visual Search**: Integrate image processing to find products by photo.
