@@ -42,18 +42,23 @@ category = st.session_state.get('selected_category', 'Electronics')
 st.markdown(f"## 🔍 Search in {category}")
 
 # ==================== SEARCH BAR ====================
-col1, col2 = st.columns([4, 1])
+# Check if we need to clear search
+if st.session_state.get('clear_search', False):
+    st.session_state.clear_search = False
+    search_query = ""
+else:
+    col1, col2 = st.columns([4, 1])
 
-with col1:
-    search_query = st.text_input(
-        "Search for products",
-        placeholder=f"Type product name... (e.g., iPhone, Laptop, Watch)",
-        key="search_input",
-        label_visibility="collapsed"
-    )
+    with col1:
+        search_query = st.text_input(
+            "Search for products",
+            placeholder=f"Type product name... (e.g., iPhone, Laptop, Watch)",
+            key="search_input",
+            label_visibility="collapsed"
+        )
 
-with col2:
-    search_button = st.button("🔍 Search", use_container_width=True, type="primary")
+    with col2:
+        search_button = st.button("🔍 Search", use_container_width=True, type="primary")
 
 # ==================== DATA STRUCTURE IMPLEMENTATION ====================
 
@@ -160,6 +165,7 @@ else:
     st.warning("❌ No products found. Try a different search term or category.")
     
     if st.button("🔄 View All Products"):
+        st.session_state.clear_search = True
         st.rerun()
 
 # ==================== DATA STRUCTURE EXPLANATION ====================

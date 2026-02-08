@@ -143,6 +143,85 @@ with col2:
 
 st.markdown("<br>", unsafe_allow_html=True)
 
+st.markdown("<br>", unsafe_allow_html=True)
+
+# ==================== SMART SHOPPING DECISION ASSISTANT ====================
+st.markdown("### 🧠 Smart Shopping Decision Assistant")
+st.info("🔧 **Queue Data Structure:** Managing simulated price history for trend analysis")
+
+# Simulate Price History using a Queue
+import random
+from collections import deque
+
+# Generate mock history if not exists
+if 'price_history' not in st.session_state:
+    st.session_state.price_history = {}
+
+if product_name not in st.session_state.price_history:
+    # Generate 15 days of price history
+    base_price = best_product['price']
+    history = deque()
+    
+    # Create a trend (either dropping, rising, or fluctuating)
+    trend_type = random.choice(['drop', 'rise', 'stable'])
+    
+    current = base_price * (1.1 if trend_type == 'drop' else 0.9)
+    
+    for _ in range(15):
+        variation = random.randint(-500, 500)
+        history.append(int(current + variation))
+        
+        if trend_type == 'drop':
+            current -= (base_price * 0.01) # Slow drop
+        elif trend_type == 'rise':
+            current += (base_price * 0.01) # Slow rise
+            
+    # Ensure current best price is the last item
+    history.append(best_product['price'])
+    st.session_state.price_history[product_name] = list(history)
+
+# Get history for chart
+history_data = st.session_state.price_history[product_name]
+
+# Analysis Logic
+avg_price = sum(history_data) / len(history_data)
+current_price = best_product['price']
+recommendation = ""
+rec_color = ""
+reason = ""
+
+if current_price < avg_price * 0.95:
+    recommendation = "🔥 BUY NOW"
+    rec_color = "#10b981" # Green
+    reason = "Price is significantly lower than the 15-day average! Great deal."
+elif current_price > avg_price * 1.05:
+    recommendation = "⚠️ WAIT"
+    rec_color = "#ef4444" # Red
+    reason = "Price is currently high. Trend suggests it might drop soon."
+else:
+    recommendation = "✅ FAIR PRICE"
+    rec_color = "#3b82f6" # Blue
+    reason = "Price is stable. You can buy if you need it now."
+
+# Display Recommendation and Chart
+col1, col2 = st.columns([1, 2])
+
+with col1:
+    st.markdown(f"""
+    <div style='background-color: {rec_color}; padding: 20px; border-radius: 10px; text-align: center;'>
+        <h2 style='color: white; margin: 0;'>{recommendation}</h2>
+    </div>
+    <p style='margin-top: 15px; font-size: 16px;'><b>Reason:</b> {reason}</p>
+    """, unsafe_allow_html=True)
+    
+    st.markdown(f"**15-Day Average:** ₹{int(avg_price):,}")
+
+with col2:
+    st.line_chart(history_data)
+    st.markdown("<p style='text-align: center; font-size: 12px; color: #64748b;'>Price Trend (Last 15 Days)</p>", unsafe_allow_html=True)
+
+st.markdown("---")
+
 # ==================== DETAILED COMPARISON TABLE ====================
 st.markdown("### 📋 All Seller Comparisons (Sorted by Price)")
 
